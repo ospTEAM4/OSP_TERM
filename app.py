@@ -1,14 +1,24 @@
 # !usr/bin/python3
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
+import google_keyword
 
 app = Flask(__name__)
 
 @app.route('/')
-def index():
+def home():
     # get 을 통한 전달받은 테이터를 확인
+
     key1 = request.args.get("urls")
     print(key1)
+    if key1 is None:
+        print('!!!')
+        return render_template('home.html')
+    else:
+        data=google_keyword.result()
+        print(data)
+
+
 
     return render_template("home.html")
 
