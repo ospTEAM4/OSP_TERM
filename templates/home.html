@@ -14,6 +14,7 @@
 
   <body>
 
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand lettercolor" href="#">TEAM4</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,27 +35,25 @@
           </ul>
       </div>
     </nav>
+
+
     <hr class="line">
 
+
     <section class="page1">
-      <h1 class="title">여론조사</h1>
-      <form action="javascript:inputUrl()" method="post">
+
+      <h1 class="title">여론조사1</h1>
+      <form action="/" method="get">
         <div style="margin-top:30px; width:50%;" class="input-group mx-auto">
-            <input type="text" id="urls" class="form-control" placeholder="분석하고 싶은 영상 URL"
+            <input type="text" id="urls" name="urls" class="form-control" placeholder="분석하고 싶은 영상 URL"
                     aria-label="분석하고 싶은 영상 URL" aria-describedby="button-addon2">
-            <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
-                style="background-color:#CD3F3E; color:#F4F6F6;"data-toggle="modal" data-target="#exampleModal">분석</button>
-            </div>
+            <button type="submit">분석</button>
         </div>
 
-        <script>
-          function inputUrl(){
-            var txt = document.getElementById("urls").value;
-            <!--txt 넘기기-->
-            <!--window.location.href=txt;-->
-          }
-        </script>
+
+
+
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal"
