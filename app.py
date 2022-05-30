@@ -15,12 +15,10 @@ def home():
         print('!!!')
         return render_template('home.html')
     else:
-        data=google_keyword.result()
+        data=google_keyword.result(key1)
         print(data)
 
-
-
-    return render_template("home.html")
+    return render_template("home.html",data=data)
 
 @app.route('/home.html')
 def home2():

@@ -8,8 +8,8 @@ import requests
 import time
 
 
-def result():
-    url ='https://www.youtube.com/watch?v=TdTp_-AD6Ys&t=1472s'
+def result(request):
+    url=request
 
     driver = webdriver.Chrome('chromedriver.exe')
     driver.get(url)
