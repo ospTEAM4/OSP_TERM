@@ -19,7 +19,7 @@ def home():
         keyword=cut_word.cut_word(comment)
         print(111)
 
-    return render_template("home.html",keyword=keyword)
+    return render_template("home.html",comment=comment)
 
 @app.route('/home.html')
 def home2():

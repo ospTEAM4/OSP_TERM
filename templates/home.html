@@ -98,12 +98,14 @@
 
     <section class="page2">
         <p>
-{#            {% if comment %}#}
-{#                {{ comment }}#}
-{#            {% endif %}#}
-            {% if keyword %}
-                {{ keyword }}
+            {% if comment %}
+                {{ comment }}
+                {% else %}
+                none
             {% endif %}
+{#            {% if keyword %}#}
+{#                {{ keyword }}#}
+{#            {% endif %}#}
 {##}
 {#            {% if preference %}#}
 {#                {{ preference }}#}
