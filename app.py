@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 import google_keyword
-
+import cut_word
 app = Flask(__name__)
 
 @app.route('/')
@@ -15,10 +15,11 @@ def home():
         print('!!!')
         return render_template('home.html')
     else:
-        data=google_keyword.result(key1)
-        print(data)
+        comment=google_keyword.result(key1)
+        keyword=cut_word.cut_word(comment)
+        print(111)
 
-    return render_template("home.html",data=data)
+    return render_template("home.html",keyword=keyword)
 
 @app.route('/home.html')
 def home2():

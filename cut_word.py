@@ -3,8 +3,9 @@ from posixpath import split
 from konlpy.tag import Mecab, Kkma, Hannanum, Okt, _komoran
 from konlpy.utils import pprint
 import pandas as pd
+from flask import Flask,render_template,redirect,url_for
 
-comments = ['나는 학생이다', '진짜 별로다', '아 에어컨 춥다...ㅠㅠ', '행복행', 'hello']  # 다운에게 받는 댓글 리스트
+#comments = ['나는 학생이다', '진짜 별로다', '아 에어컨 춥다...ㅠㅠ', '행복행', 'hello']  # 다운에게 받는 댓글 리스트
 split_list = []  # 유나에게 넘기는 한 댓글 분석한 리스트
 preference = {"like": 0, "neutral": 0, "dislike": 0}
 word = -2  # like=1 , neutral=0 dislike=-1
@@ -41,13 +42,18 @@ def preference_check(word):
         di+=1
 
 
-if __name__ == '__main__':
+def cut_word(comments):
     word_count(comments)  # 키워드 총 분석
 
     for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
         print(korean_split(comment))  # 유나에게 넘길 리스트
         # 유나한테 선호도 결과 받아옴
         preference_check(word)
-
-    preference[0] = li, preference[1] = ne, preference[2] = di
+    keyword=word_count(comments)
+    preference["like"] = li
+    preference["neutral"] = ne
+    preference["dislike"] = di
+    print(keyword)
+    print(preference)
+    return keyword
     # 효정에게 keyword, preference 전달

@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 import re
 import requests
 import time
-
+import cut_word
 
 def result(request):
     url=request
@@ -71,55 +71,57 @@ def result(request):
         temp_comment = temp_comment.replace('\t', '')
         temp_comment = temp_comment.replace('    ', '')
         comment_final.append(temp_comment)
-
-    print(id_final)
-    print(comment_final)
-    f = open('origin.txt', 'w', encoding='UTF-8')
-
-    for comment in comment_final:
-        f.write(comment + '\n')
-
-    f.close()
-    #######################################################################################
-    file = open('origin.txt', 'r', encoding='UTF-8')
-    word_dict = {}
-
-    keys = []
-    values = []
-    word_count = {}
-
-    line = file.readline()
-    stop_words = set(stopwords.words('english'))
-    while line:
-        sentence = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]', ' ', line)
-        sentence = sentence.lower()
-        word_list = sentence.split()
-        for word in word_list:
-            if word not in stop_words:
-                if word in word_count:
-                    word_count[word] += 1
-                else:
-                    word_count[word] = 1
-
-        line = file.readline()
-
-    sort_list = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
-    # print(sort_dict)
-    file.close()
-    f = open('sorted.txt', 'w', encoding='UTF-8')
-
-    # print(type(sort_list[1]))
-    # print(sort_list[1])
-    for i in sort_list:
-        string = str(i)
-        string = string.strip("("")""'")
-        string = string.replace(",", "")
-        string = string.replace("'", "")
-        f.write(string + '\n')
-
-    f.close()
+    #
+    # print(id_final)
+    # print(comment_final)
 
     return comment_final
+    # f = open('origin.txt', 'w', encoding='UTF-8')
+    #
+    # for comment in comment_final:
+    #     f.write(comment + '\n')
+    #
+    # f.close()
+    #######################################################################################
+    # file = open('origin.txt', 'r', encoding='UTF-8')
+    # word_dict = {}
+    #
+    # keys = []
+    # values = []
+    # word_count = {}
+    #
+    # line = file.readline()
+    # stop_words = set(stopwords.words('english'))
+    # while line:
+    #     sentence = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]', ' ', line)
+    #     sentence = sentence.lower()
+    #     word_list = sentence.split()
+    #     for word in word_list:
+    #         if word not in stop_words:
+    #             if word in word_count:
+    #                 word_count[word] += 1
+    #             else:
+    #                 word_count[word] = 1
+    #
+    #     line = file.readline()
+    #
+    # sort_list = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
+    # # print(sort_dict)
+    # file.close()
+    # f = open('sorted.txt', 'w', encoding='UTF-8')
+    #
+    # # print(type(sort_list[1]))
+    # # print(sort_list[1])
+    # for i in sort_list:
+    #     string = str(i)
+    #     string = string.strip("("")""'")
+    #     string = string.replace(",", "")
+    #     string = string.replace("'", "")
+    #     f.write(string + '\n')
+    #
+    # f.close()
+    #
+    # return comment_final
     # 텍스트파일 정렬해서 sorted.txt로 붙여넣기
     ####################################################################
     # data = open('accounts/sorted.txt', 'r', encoding='UTF-8')
