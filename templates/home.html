@@ -43,13 +43,29 @@
     <section class="page1">
 
       <h1 class="title">여론조사1</h1>
+{#      <form action="/" method="get">#}
+{#        <div style="margin-top:30px; width:50%;" class="input-group mx-auto">#}
+{#            <input type="text" id="urls" name="urls" class="form-control" placeholder="분석하고 싶은 영상 URL"#}
+{#                    aria-label="분석하고 싶은 영상 URL" aria-describedby="button-addon2">#}
+{#            <button type="submit">분석</button>#}
+{#        </div>#}
       <form action="/" method="get">
         <div style="margin-top:30px; width:50%;" class="input-group mx-auto">
-            <input type="text" id="urls" name="urls" class="form-control" placeholder="분석하고 싶은 영상 URL"
+            <input type="text" id="urls" name="urls" value="tmp tmp tmp" class="form-control" placeholder="분석하고 싶은 영상 URL"
                     aria-label="분석하고 싶은 영상 URL" aria-describedby="button-addon2">
-            <button type="submit">분석</button>
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
+                style="background-color:#CD3F3E; color:#F4F6F6;"data-toggle="modal" data-target="#exampleModal">분석</button>
+            </div>
         </div>
 
+        <script>
+          function inputUrl(){
+            var txt = document.getElementById("urls").value;
+            <!--txt 넘기기-->
+            <!--window.location.href=txt;-->
+          }
+        </script>
 
 
 
@@ -66,7 +82,9 @@
                 </button>
               </div>
               <div class="modal-body">
-                  <p>dassdfs</p>
+                  <p>
+
+                  </p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

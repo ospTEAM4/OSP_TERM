@@ -17,7 +17,6 @@ def result(request):
 
     time.sleep(1.5)
 
-    print("pl")
     # 유튜브 팝업 닫기
     try:
         driver.find_element_by_css_selector("#dismiss-button > a").click()
@@ -119,8 +118,8 @@ def result(request):
         f.write(string + '\n')
 
     f.close()
-    print(word_count)
-    return word_count
+
+    return comment_final
     # 텍스트파일 정렬해서 sorted.txt로 붙여넣기
     ####################################################################
     # data = open('accounts/sorted.txt', 'r', encoding='UTF-8')
