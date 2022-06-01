@@ -51,7 +51,7 @@
 {#        </div>#}
       <form action="/" method="get">
         <div style="margin-top:30px; width:50%;" class="input-group mx-auto">
-            <input type="text" id="urls" name="urls" value="tmp tmp tmp" class="form-control" placeholder="분석하고 싶은 영상 URL"
+            <input type="text" id="urls" name="urls" value="" class="form-control" placeholder="분석하고 싶은 영상 URL"
                     aria-label="분석하고 싶은 영상 URL" aria-describedby="button-addon2">
             <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
@@ -99,7 +99,16 @@
     <section class="page2">
         <p>
             {% if comment %}
-                {{ comment }}
+                {{ comment.0 }}
+                <br>
+                {{ comment.1 }}
+                  <br>
+                {{ comment.2 }}
+                  <br>
+                {{ comment.3 }}
+                  <br>
+                {{ comment.4 }}
+                  <br>
                 {% else %}
                 none
             {% endif %}
