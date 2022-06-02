@@ -14,6 +14,7 @@
 
   <body>
 
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand lettercolor" href="#">TEAM4</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,24 +35,33 @@
           </ul>
       </div>
     </nav>
+
+
     <hr class="line">
 
+
     <section class="page1">
+
       <h1 class="title">여론조사</h1>
-      <form action="javaScript:inputUrl" method="post">
+
+      <form action="/" method="get">
         <div style="margin-top:30px; width:50%;" class="input-group mx-auto">
+            <input type="text" id="urls" name="urls" value="" class="form-control" placeholder="분석하고 싶은 영상 URL"
                     aria-label="분석하고 싶은 영상 URL" aria-describedby="button-addon2">
             <div class="input-group-append">
+              <!--
             <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
-                style="background-color:#CD3F3E; color:#F4F6F6;"data-toggle="modal" data-target="#exampleModal">분석</button>
+                style="background-color:#CD3F3E; color:#F4F6F6;"data-toggle="modal" data-target="#exampleModal">분석</button>-->
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
+                    style="background-color:#CD3F3E; color:#F4F6F6;">분석</button>
             </div>
         </div>
 
         <script>
           function inputUrl(){
             var txt = document.getElementById("urls").value;
-            <!--txt 넘기기-->
-            <!--window.location.href=txt;-->
+            // <!--txt 넘기기-->
+            // <!--window.location.href=txt;-->
           }
         </script>
 
@@ -67,11 +77,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                  <p>dassdfs</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!--<button type="button" class="btn btn-primary" style="background-color: #CD3F3E">Save changes</button>-->
+
               </div>
             </div>
           </div>
@@ -79,10 +85,44 @@
       </form>
     </section>
 
-    <section class="page2">
+    <div class="card mx-auto" style="width: 80%; margin-top:30px; margin-bottom:30px;">
+          <div class="card-header" style="background-color:#FF9C91; text-align:center; padding-bottom:0px;">
+              <span><h2>상위 키워드 5개</h2></span>
+          </div>
+          <ul class="list-group list-group-flush">
+            {% if comment %}
+              <li class="list-group-item">{{ comment.0 }}</li>
+              <li class="list-group-item">{{ comment.1 }}</li>
+              <li class="list-group-item">{{ comment.2 }}</li>
+              <li class="list-group-item">{{ comment.3 }}</li>
+              <li class="list-group-item">{{ comment.4 }}</li>
+              {% else %}
+              <li class="list-group-item" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+          {% endif %}
+        </ul>
+    </div>
 
+    <!--
+    <h2 style="text-align:center; margin-top:20px;">상위 키워드 5개</h2>
+    <section id="box" class="border rounded">
+        <p>
+            {% if comment %}
+                <h5 id="comments", class="border rounded">{{ comment.0 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.1 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.2 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.3 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.4 }}</h5>
+                  <br>
+                {% else %}
+                <h5 id="comments", class="border rounded">none</h5>
+            {% endif %}
+        </p>
     </section>
-<!--
+
     <div class="top1">
               OSP TERM PROJECT
               <div class="top2"><a href="home.html">TEAM 04</a></div>
