@@ -16,9 +16,9 @@ def home():
         return render_template('home.html')
     else:
         comment=google_keyword.result(key1)
-        keyword=cut_word.cut_word(comment)
+        keyword,preference=cut_word.cut_word(comment)
         print(111)
-    return render_template("home.html",comment=comment)
+    return render_template("home.html",keyword=keyword,preference=preference)
    
 
 @app.route('/home.html')
