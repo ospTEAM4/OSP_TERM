@@ -85,30 +85,85 @@
       </form>
     </section>
 
-    <div class="card mx-auto" style="width: 80%; margin-top:30px; margin-bottom:30px;">
-          <div class="card-header" style="background-color:#FF9C91; text-align:center; padding-bottom:0px;">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <div class="float-left" style="width:40%; height:40%; margin-top:50px; margin-left:100px; margin-bottom:10%;">
+      <canvas id="pie-chart" width="50" height="50"></canvas>
+    </div>
+
+    <script>
+      {% if preference %}
+          new Chart(document.getElementById("pie-chart"), {
+          type: 'pie',
+          data: {
+            labels: ["Positive", "Neutral", "Negative"],
+            datasets: [{
+              label: "nums",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+              data: [{{preference[0]}},{{preference[1]}},{{preference[2]}}]
+            }]
+          },
+          options: {
+            title: {
+              display: false,
+              text: 'Preferences'
+            }
+          }
+        });
+      {% else %}
+        new Chart(document.getElementById("pie-chart"), {
+          type: 'pie',
+          data: {
+            labels: ["Positive", "Neutral", "Negative"],
+            datasets: [{
+              label: "nums",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+              data: [30,30,30]
+            }]
+          },
+          options: {
+            title: {
+              display: false,
+              text: 'Preferences'
+            }
+          }
+        });
+      {% endif %}
+    </script>
+
+    <div class="card float-right" style="width: 35%; margin-top:150px; margin-bottom:30px; margin-right:100px;">
+          <div class="card-header" style="background-color:#CD3F3E; color:#F4F6F6; text-align:center; padding-bottom:0px;">
               <span><h2>상위 키워드 5개</h2></span>
           </div>
           <ul class="list-group list-group-flush">
             {% if keyword %}
-              <li class="list-group-item">{{ keyword.0 }}</li>
-              <li class="list-group-item">{{ keyword.1 }}</li>
-              <li class="list-group-item">{{ keyword.2 }}</li>
-              <li class="list-group-item">{{ keyword.3 }}</li>
-              <li class="list-group-item">{{ keyword.4 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.0 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.1 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.2 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.3 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.4 }}</li>
               {% else %}
-              <li class="list-group-item" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
           {% endif %}
         </ul>
-    </div>
-<div>
-  {% if preference %}
-    <h2>{{ preference.0 }}</h2>
-    {% else %}
-    <h2>none</h2>
-{% endif %}
-</div>
-    
+  </div>
+
+<!--
+  <div class="mx-auto" style="width: 35%; margin-top:30px; margin-bottom:30px; margin-left:70px;" >
+    {% if preference %}
+      <h2>{{ preference.0 }}</h2>
+      {% else %}
+      <h2>none</h2>
+  {% endif %}
+</div>-->
+
+
+
+
+
     <!--
     <h2 style="text-align:center; margin-top:20px;">상위 키워드 5개</h2>
     <section id="box" class="border rounded">
