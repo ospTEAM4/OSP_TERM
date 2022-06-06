@@ -38,10 +38,6 @@ def word_count(comments):  # 댓글리스트 모든 댓글 카운트 & top 5개 
     keywords = list(keyword.index)
     return keywords
 
-
-
-
-
 def preference_check(word):
     if (word == 1):
         global li
@@ -68,5 +64,6 @@ def cut_word(comments):
     print(keyword)
     print(preference)
     preferenceCounts = list(preference.values())
+
     return keyword, preferenceCounts
     # 효정에게 keyword, preference 전달
