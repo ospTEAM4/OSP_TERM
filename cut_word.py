@@ -25,16 +25,8 @@ def korean_split(comment):  # 댓글 하나씩 분석해서 어간 list 만들�
     return split_list
 
 
-# <<<<<<< Updated upstream
 def word_count(comments):  # 댓글리스트 모든 댓글 카운트 & top 5개 뽑기        
-# =======
-# def word_count(comment):  # 댓글리스트 모든 댓글 카운트 & top 5개 뽑기
-#     keyword = pd.Series(comment).value_counts().head(5)
-#     print('plz work!!')
-#     print(keyword)
-#     return keyword
-#
-# >>>>>>> Stashed changes
+
 
     for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
         tmp=korean_split(comment)

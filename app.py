@@ -16,19 +16,11 @@ def home():
         return render_template('home.html')
     else:
         comment=google_keyword.result(key1)
-# <<<<<<< Updated upstream
         keyword,preference=cut_word.cut_word(comment)
         print(111)
     return render_template("home.html",keyword=keyword,preference=preference)
    
-# =======
-#         print(comment)
-#         keyword=cut_word.cut_word(comment)
-#         print(111)
-#         print(keyword)
-#
-#     return render_template("home.html",comment=comment)
-# >>>>>>> Stashed changes
+
 
 @app.route('/home.html')
 def home2():
