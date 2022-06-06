@@ -15,6 +15,9 @@ global ne
 ne= 0
 global di
 di= 0
+text=[]
+count={}
+preferenceCounts=[]
 
 def korean_split(comment):  # 댓글 하나씩 분석해서 어간 list 만들어서 리턴
     tokenizer = Okt()
@@ -22,13 +25,19 @@ def korean_split(comment):  # 댓글 하나씩 분석해서 어간 list 만들�
     return split_list
 
 
-def word_count(comment):  # 댓글리스트 모든 댓글 카운트 & top 5개 뽑기
-    keyword = pd.Series(comment).value_counts().head(5)
-    return keyword
+def word_count(comments):  # 댓글리스트 모든 댓글 카운트 & top 5개 뽑기        
 
+    for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
+        tmp=korean_split(comment)
+        text.append(tmp)        
 
+    for x in text:
+        for y in x:
+            count[y]=count.get(y,0)+1  
 
-
+    keyword = pd.Series(count).head()
+    keywords = list(keyword.index)
+    return keywords
 
 def preference_check(word):
     if (word == 1):
@@ -55,5 +64,6 @@ def cut_word(comments):
     preference["dislike"] = di
     print(keyword)
     print(preference)
-    return keyword
+    preferenceCounts=list(preference.values())
+    return keyword, preferenceCounts
     # 효정에게 keyword, preference 전달

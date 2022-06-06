@@ -16,10 +16,10 @@ def home():
         return render_template('home.html')
     else:
         comment=google_keyword.result(key1)
-        keyword=cut_word.cut_word(comment)
+        keyword,preference=cut_word.cut_word(comment)
         print(111)
-
-    return render_template("home.html",comment=comment)
+    return render_template("home.html",keyword=keyword,preference=preference)
+   
 
 @app.route('/home.html')
 def home2():
@@ -32,6 +32,7 @@ def about():
 @app.route('/contact.html')
 def contact():
     return render_template("contact.html")
+
 
 if __name__=="__main__":
     app.run(debug=True)
