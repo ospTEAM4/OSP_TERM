@@ -28,18 +28,19 @@ def result(request):
 
     while True:
         driver.execute_script("window.scrollTo(0, document.documentElement.scrollHeight);")
-        time.sleep(1.5)
+        time.sleep(3)
 
         new_height = driver.execute_script("return document.documentElement.scrollHeight")
         if new_height == last_height:
             break
         last_height = new_height
+
     time.sleep(1.5)
 
     # 대댓글 모두 열기
     buttons = driver.find_elements_by_css_selector("#more-replies > a")
 
-    time.sleep(3)
+    time.sleep(1.5)
 
     for button in buttons:
         button.send_keys(Keys.ENTER)
@@ -71,7 +72,7 @@ def result(request):
         temp_comment = temp_comment.replace('    ', '')
         comment_final.append(temp_comment)
     #
-    # print(id_final)
+    # print(id_final)s
     # print(comment_final)
 
     return comment_final
