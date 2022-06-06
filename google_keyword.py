@@ -12,6 +12,7 @@ def result(request):
     url=request
 
     driver = webdriver.Chrome('chromedriver.exe')
+    #driver = webdriver.Firefox('geckodriver.exe')
     driver.get(url)
     driver.implicitly_wait(10)
 
