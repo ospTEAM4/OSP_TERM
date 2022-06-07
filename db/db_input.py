@@ -35,7 +35,7 @@ def update_element(url, element, record_element): # 기존 URL에 새 결과 UPD
     collection.delete_one({"url":url})
     collection.insert_one(element)
     
-def find_url(url): # DB에서 url 찾기. 있으면 1, 없으면 0 반환
+def find_url(url): # DB에서 url 찾기. 있으면 해당 data, 없으면 0 반환
     search = collection.find({"url":url})
     for element in search:
         return element
