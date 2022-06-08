@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>TEAM04</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="http://fonts.cdnfonts.com/css/dk-cool-crayon" rel="stylesheet">
+  </head>
+
+  <body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand lettercolor" href="#">TEAM4</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link lettercolor" href="">HOME<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link lettercolor" href="about.html">ABOUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link lettercolor" href="contact.html">CONTACT</a>
+            </li>
+          </ul>
+      </div>
+    </nav>
+
+
+    <hr class="line">
+
+
+    <section class="page1">
+
+      <h1 class="title">How Many People<br>like this video?</h1>
+
+      <form action="/" method="get">
+        <div style="margin-top:30px; width:50%;" class="input-group mx-auto">
+            <input type="text" id="urls" name="urls" value="" class="form-control" placeholder="URL"
+                    aria-label="분석하고 싶은 영상 URL" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <!--
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
+                style="background-color:#CD3F3E; color:#F4F6F6;"data-toggle="modal" data-target="#exampleModal">분석</button>-->
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
+                    style="background-color:#CD3F3E; color:#F4F6F6;">Start</button>
+            </div>
+        </div>
+
+        <script>
+          function inputUrl(){
+            var txt = document.getElementById("urls").value;
+            // <!--txt 넘기기-->
+            // <!--window.location.href=txt;-->
+          }
+        </script>
+
+        <!-- Modal -->
+  <!--      <div class="modal fade" id="exampleModal"
+                 tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl"  role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">분석 결과</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <div class="float-left" style="width:40%; height:40%; margin-top:50px; margin-left:100px; margin-bottom:10%;">
+      <canvas id="pie-chart" width="50" height="50"></canvas>
+    </div>
+
+    <script>
+      {% if preference %}
+          new Chart(document.getElementById("pie-chart"), {
+          type: 'pie',
+          data: {
+            labels: ["Positive", "Neutral", "Negative"],
+            datasets: [{
+              label: "nums",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+              data: [{{preference[0]}},{{preference[1]}},{{preference[2]}}]
+            }]
+          },
+          options: {
+            title: {
+              display: false,
+              text: 'Preferences'
+            }
+          }
+        });
+      {% else %}
+        new Chart(document.getElementById("pie-chart"), {
+          type: 'pie',
+          data: {
+            labels: ["Positive", "Neutral", "Negative"],
+            datasets: [{
+              label: "nums",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+              data: [30,30,30]
+            }]
+          },
+          options: {
+            title: {
+              display: false,
+              text: 'Preferences'
+            }
+          }
+        });
+      {% endif %}
+    </script>
+
+    <div class="card float-right" style="width: 35%; margin-top:150px; margin-bottom:30px; margin-right:100px;">
+          <div class="card-header" style="background-color:#CD3F3E; color:#F4F6F6; text-align:center; padding-bottom:0px;">
+              <span><h2>KEYWORD</h2></span>
+          </div>
+          <ul class="list-group list-group-flush">
+            {% if keyword %}
+              <li class="list-group-item lettercolor">{{ keyword.0 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.1 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.2 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.3 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.4 }}</li>
+              {% else %}
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+          {% endif %}
+        </ul>
+  </div>
+
+  <div class="mx-auto" style="width:45%;margin-bottom:50px;">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+
+  <script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: 'Positive',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(235, 83, 83, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(235, 83, 83, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          },{
+              label: 'Negative',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(24, 116, 152, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(24, 116, 152, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          },{
+              label: 'Neutral',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(54, 174, 124, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 194, 0.2)',
+                  'rgba(153, 102, 251, 0.2)',
+                  'rgba(255, 159, 61, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(54, 174, 124)',
+                  'rgba(54, 161, 235, 1)',
+                  'rgba(255, 203, 86, 1)',
+                  'rgba(75, 193, 192, 1)',
+                  'rgba(153, 122, 255, 1)',
+                  'rgba(255, 139, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+            xAxes: [{ stacked: true }],
+            yAxes: [{ stacked: true }]
+          }
+      }
+  });
+  </script>
+
+<!--
+  <div class="mx-auto" style="width:50%; height:50%;">
+    <canvas id="barChart" width="400" height="400"></canvas>
+  </div>
+
+  <script>
+  const ctx = document.getElementById('barChart');
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: '선호도 비욜',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>-->
+
+<!--
+  <div class="mx-auto" style="width: 35%; margin-top:30px; margin-bottom:30px; margin-left:70px;" >
+    {% if preference %}
+      <h2>{{ preference.0 }}</h2>
+      {% else %}
+      <h2>none</h2>
+  {% endif %}
+</div>-->
+
+
+
+
+
+    <!--
+    <h2 style="text-align:center; margin-top:20px;">상위 키워드 5개</h2>
+    <section id="box" class="border rounded">
+        <p>
+            {% if comment %}
+                <h5 id="comments", class="border rounded">{{ comment.0 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.1 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.2 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.3 }}</h5>
+                  <br>
+                <h5 id="comments", class="border rounded">{{ comment.4 }}</h5>
+                  <br>
+                {% else %}
+                <h5 id="comments", class="border rounded">none</h5>
+            {% endif %}
+        </p>
+    </section>
+
+    <div class="top1">
+              OSP TERM PROJECT
+              <div class="top2"><a href="home.html">TEAM 04</a></div>
+              <div class="top3">
+                  <div class="topItem"><a href="">member</a></div>
+                  <div calss="topItem"><a href="">contact</a></div>
+              </div>
+          </div>
+          <h1 class="title1">어떤 언어로 댓글이 달렸을까?</h1>
+          <h5>각 카테고리를 클릭하세요٩(*'へ'*)و</h5>
+
+
+          <input id="menu1" type="checkbox" />
+          <label for="menu1" class="t1"><h2>주제 선정 이유 ↓</h2></label>
+              <ul class="menus1">
+                  <h3>평소에 유튜브를 이용하면서 한국 영상임에도 불구하고 한국어가 아닌 댓글이 달릴 때도 있다<br>
+                  때로는 어떤 나라일지 궁금하기도해 어떤 언어가 댓글을 달았는 지 분석해보는 프로젝트를 진행하게 되었다.</h3>
+              </ul>
+
+          <input id="menu2" type="checkbox" />
+          <label for="menu2" class="t2"><h2>분석하고 싶은 영상 URL ↓</h2></label>
+              <ul class="menus2">
+                  <h3>분석해보고 싶은 영상의 주소를 입력해보세요.</h3>
+                  <div><input id="input" placeholder="URL입력" />
+                      <button id="add-button">입력</button>
+                  </div>
+              </ul>
+
+          <input id="menu3" type="checkbox" />
+          <label for="menu3" class="t3"><h2>분석 결과 ↓</h2></label>
+              <ul class="menus3">
+                  <img src="https://cdn.pixabay.com/photo/2013/07/12/14/18/productivity-148197_1280.png" width="300" height="200">
+              </ul>
+
+          <input id="menu4" type="checkbox" />
+          <label for="menu4" class="t4"><h2>프로젝트 구현 방법 설명 ↓</h2></label>
+              <ul class="menus4">
+                  <ol>
+                      <li>기능 A : 기능 A를 구현하기 위해 ~~를 사용하였다.</li>
+                      <li>기능 B : 기능 A를 구현하기 위해 ~~를 사용하였다..</li>
+                      <li>기능 C : 기능 A를 구현하기 위해 ~~를 사용하였다.</li>
+                  </ol>
+              </ul>
+
+          <input id="menu5" type="checkbox" />
+          <label for="menu5" class="t5"><h2>프로젝트에서 잘 구현된 점 ↓</h2></label>
+              <ul class="menus5">
+                  <ul>
+                      <li>A한 부분이 잘 구현되었다.</li>
+                      <li>B한 부분이 잘 구현되었다.</li>
+                  </ul>
+              </ul>
+
+          <input id="menu6" type="checkbox" />
+          <label for="menu6" class="t6"><h2>프로젝트에 대해 보완하고 싶은 점 ↓</h2></label>
+              <ul class="menus6">
+                  <h3>기능 C가 조금 아쉬워 다음에 비슷한 기능을 구현하게 되다면 이 부분은 꼭 보완하고 싶다.</h3>
+              </ul>
+
+          <input id="menu7" type="checkbox" />
+          <label for="menu7" class="t7"><h2>FEEDBACK ↓</h2></label>
+                  <ul class="menus7">
+                      <h3>자유롭게 피드백 해주세요.</h3>
+                      <textarea name="comments" rows="10" cols="50"></textarea><br>
+                      <input type="button" name="submit" value="submit">
+                  </ul>-->
+  </body>
+</html>
