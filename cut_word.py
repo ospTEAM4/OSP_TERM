@@ -82,11 +82,12 @@ def cut_word(comments):
         analysis(comment)
 
     keyword=word_count(comments)
+    preference = {}
     preference["like"] = li
     preference["neutral"] = ne
     preference["dislike"] = di
     print(keyword)
     print(preference)
     preferenceCounts=list(preference.values())
-    return keyword, preferenceCounts
+    return keyword, preferenceCounts, preference
     # 효정에게 keyword, preference 전달
