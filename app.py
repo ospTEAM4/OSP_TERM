@@ -17,8 +17,8 @@ def home():
         return render_template('home.html')
     else:
         comment=google_keyword.result(key1)
-        keyword,preference=cut_word.cut_word(comment)
-        database.push_data(key1, preference)
+        keyword,preference,preferenceRates=cut_word.cut_word(comment)
+        database.push_data(key1, preferenceRates)
         print(111)
     return render_template("home.html",keyword=keyword,preference=preference)
    

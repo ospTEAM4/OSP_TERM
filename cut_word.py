@@ -89,5 +89,5 @@ def cut_word(comments):
     print(keyword)
     print(preference)
     preferenceCounts=list(preference.values())
-    return keyword, preferenceCounts
+    return keyword, preferenceCounts, preference
     # 효정에게 keyword, preference 전달
