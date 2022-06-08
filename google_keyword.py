@@ -77,9 +77,7 @@ def result(request):
         temp_comment = temp_comment.replace('\t', '')
         temp_comment = temp_comment.replace('    ', '')
         comment_final.append(temp_comment)
-    #
-    # print(id_final)s
-    # print(comment_final)
+
 
     return comment_final
     # f = open('origin.txt', 'w', encoding='UTF-8')
