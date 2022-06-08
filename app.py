@@ -3,6 +3,7 @@
 from flask import Flask, render_template, request
 import google_keyword
 import cut_word
+import database
 app = Flask(__name__)
 
 @app.route('/')
@@ -17,6 +18,7 @@ def home():
     else:
         comment=google_keyword.result(key1)
         keyword,preference=cut_word.cut_word(comment)
+        database.push_data(key1, preference)
         print(111)
     return render_template("home.html",keyword=keyword,preference=preference)
    
