@@ -55,15 +55,6 @@ def preference_check(word):
 def cut_word(comments):
     word_count(comments)  # 키워드 총 분석
     for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
-<<<<<<< HEAD
-<<<<<<< HEAD
-        tmp = korean_split(comment)
-        text.append(tmp)  # 유나에게 넘길 리스트
-        # 유나한테 선호도 결과 받아옴
-        preference_check(word)
-        keyword = word_count(text)
-=======
-        #print(korean_split(comment))  # 유나에게 넘길 리스트
         analysis(comment)
 =======
         print(korean_split(comment))  # 유나에게 넘길 리스트
@@ -71,7 +62,6 @@ def cut_word(comments):
         # 유나한테 선호도 결과 받아옴
         preference_check(word)
     keyword=word_count(comments)
->>>>>>> 64969f59fefc47e56014dfa3675e7574847519d1
     preference["like"] = li
     preference["neutral"] = ne
     preference["dislike"] = di
