@@ -22,6 +22,7 @@ def home():
     return render_template("home.html",keyword=keyword,preference=preference)
 
 
+
 @app.route('/home.html')
 def home2():
     return render_template("home.html")

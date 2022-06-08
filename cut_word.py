@@ -26,6 +26,7 @@ def korean_split(comment):  # 댓글 하나씩 분석해서 어간 list 만들�
 
 def word_count(comments):  # 댓글리스트 모든 댓글 카운트 & top 5개 뽑기
 
+
     for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
         tmp=korean_split(comment)
         text.append(tmp)
@@ -55,9 +56,11 @@ def preference_check(word):
 
 
 def cut_word(comments):
-
+    word_count(comments)  # 키워드 총 분석
     for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
+        #analysis(comment)
         print(korean_split(comment))  # 유나에게 넘길 리스트
+        #parent of 64969f59 (add API)
         # 유나한테 선호도 결과 받아옴
         preference_check(word)
     keyword=word_count(comments)

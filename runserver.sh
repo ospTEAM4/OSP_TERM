@@ -8,8 +8,7 @@ echo "$PW" | sudo -kS apt install python3.9
 python3 --version
 echo "$PW" | sudo pip install -r requirements.txt
 
-chmod 700 runbrowser.sh
+
+chmod 700 runbrower.sh
 
 gnome-terminal -e ./runbrowser.sh
-
-python3 app.py
