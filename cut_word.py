@@ -60,8 +60,9 @@ def word_count(comments):  # 댓글리스트 모든 댓글 카운트 & top 5개 
         for y in x:
             count[y]=count.get(y,0)+1  
 
-    keyword = pd.Series(count).head()
-    keywords = list(keyword.index)
+    keyword = pd.Series(count)
+    sortings=keyword.sort_values(ascending=False)
+    keywords = list(sortings.index)
     return keywords
 
 def preference_check(word):
@@ -86,6 +87,7 @@ def cut_word(comments):
     preference["like"] = li
     preference["neutral"] = ne
     preference["dislike"] = di
+    print(count)
     print(keyword)
     print(preference)
     preferenceCounts=list(preference.values())
