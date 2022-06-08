@@ -36,6 +36,10 @@ def word_count(comments):  # 댓글리스트 모든 댓글 카운트 & top 5개 
 
     keyword = pd.Series(count).head()
     keywords = list(keyword.index)
+    print(1)
+    print(keyword)
+    print(2)
+    print(keywords)
     return keywords
 
 def preference_check(word):
@@ -51,7 +55,6 @@ def preference_check(word):
 
 
 def cut_word(comments):
-    word_count(comments)  # 키워드 총 분석
 
     for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
         print(korean_split(comment))  # 유나에게 넘길 리스트
