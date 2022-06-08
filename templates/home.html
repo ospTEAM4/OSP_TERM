@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="http://fonts.cdnfonts.com/css/dk-cool-crayon" rel="stylesheet">
   </head>
 
   <body>
@@ -42,18 +43,18 @@
 
     <section class="page1">
 
-      <h1 class="title">여론조사</h1>
+      <h1 class="title">How Many People<br>like this video?</h1>
 
       <form action="/" method="get">
         <div style="margin-top:30px; width:50%;" class="input-group mx-auto">
-            <input type="text" id="urls" name="urls" value="" class="form-control" placeholder="분석하고 싶은 영상 URL"
+            <input type="text" id="urls" name="urls" value="" class="form-control" placeholder="URL"
                     aria-label="분석하고 싶은 영상 URL" aria-describedby="button-addon2">
             <div class="input-group-append">
               <!--
             <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
                 style="background-color:#CD3F3E; color:#F4F6F6;"data-toggle="modal" data-target="#exampleModal">분석</button>-->
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
-                    style="background-color:#CD3F3E; color:#F4F6F6;">분석</button>
+                    style="background-color:#CD3F3E; color:#F4F6F6;">Start</button>
             </div>
         </div>
 
@@ -66,7 +67,7 @@
         </script>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal"
+  <!--      <div class="modal fade" id="exampleModal"
                  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-xl"  role="document">
             <div class="modal-content">
@@ -83,32 +84,211 @@
           </div>
         </div>
       </form>
-    </section>
+    </section>-->
 
-    <div class="card mx-auto" style="width: 80%; margin-top:30px; margin-bottom:30px;">
-          <div class="card-header" style="background-color:#FF9C91; text-align:center; padding-bottom:0px;">
-              <span><h2>상위 키워드 5개</h2></span>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <div class="float-left" style="width:40%; height:40%; margin-top:50px; margin-left:100px; margin-bottom:10%;">
+      <canvas id="pie-chart" width="50" height="50"></canvas>
+    </div>
+
+    <script>
+      {% if preference %}
+          new Chart(document.getElementById("pie-chart"), {
+          type: 'pie',
+          data: {
+            labels: ["Positive", "Neutral", "Negative"],
+            datasets: [{
+              label: "nums",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+              data: [{{preference[0]}},{{preference[1]}},{{preference[2]}}]
+            }]
+          },
+          options: {
+            title: {
+              display: false,
+              text: 'Preferences'
+            }
+          }
+        });
+      {% else %}
+        new Chart(document.getElementById("pie-chart"), {
+          type: 'pie',
+          data: {
+            labels: ["Positive", "Neutral", "Negative"],
+            datasets: [{
+              label: "nums",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+              data: [30,30,30]
+            }]
+          },
+          options: {
+            title: {
+              display: false,
+              text: 'Preferences'
+            }
+          }
+        });
+      {% endif %}
+    </script>
+
+    <div class="card float-right" style="width: 35%; margin-top:150px; margin-bottom:30px; margin-right:100px;">
+          <div class="card-header" style="background-color:#CD3F3E; color:#F4F6F6; text-align:center; padding-bottom:0px;">
+              <span><h2>KEYWORD</h2></span>
           </div>
           <ul class="list-group list-group-flush">
             {% if keyword %}
-              <li class="list-group-item">{{ keyword.0 }}</li>
-              <li class="list-group-item">{{ keyword.1 }}</li>
-              <li class="list-group-item">{{ keyword.2 }}</li>
-              <li class="list-group-item">{{ keyword.3 }}</li>
-              <li class="list-group-item">{{ keyword.4 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.0 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.1 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.2 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.3 }}</li>
+              <li class="list-group-item lettercolor">{{ keyword.4 }}</li>
               {% else %}
-              <li class="list-group-item" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
+              <li class="list-group-item lettercolor" style="text-align:center; padding-bottom:0px;"><h3>none</h3></li>
           {% endif %}
         </ul>
-    </div>
-<div>
-  {% if preference %}
-    <h2>{{ preference.0 }}</h2>
-    {% else %}
-    <h2>none</h2>
-{% endif %}
-</div>
-    
+  </div>
+
+  <div class="mx-auto" style="width:45%;margin-bottom:50px;">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+
+  <script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: 'Positive',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(235, 83, 83, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(235, 83, 83, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          },{
+              label: 'Negative',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(24, 116, 152, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(24, 116, 152, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          },{
+              label: 'Neutral',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(54, 174, 124, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 194, 0.2)',
+                  'rgba(153, 102, 251, 0.2)',
+                  'rgba(255, 159, 61, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(54, 174, 124)',
+                  'rgba(54, 161, 235, 1)',
+                  'rgba(255, 203, 86, 1)',
+                  'rgba(75, 193, 192, 1)',
+                  'rgba(153, 122, 255, 1)',
+                  'rgba(255, 139, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+            xAxes: [{ stacked: true }],
+            yAxes: [{ stacked: true }]
+          }
+      }
+  });
+  </script>
+
+<!--
+  <div class="mx-auto" style="width:50%; height:50%;">
+    <canvas id="barChart" width="400" height="400"></canvas>
+  </div>
+
+  <script>
+  const ctx = document.getElementById('barChart');
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: '선호도 비욜',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>-->
+
+<!--
+  <div class="mx-auto" style="width: 35%; margin-top:30px; margin-bottom:30px; margin-left:70px;" >
+    {% if preference %}
+      <h2>{{ preference.0 }}</h2>
+      {% else %}
+      <h2>none</h2>
+  {% endif %}
+</div>-->
+
+
+
+
+
     <!--
     <h2 style="text-align:center; margin-top:20px;">상위 키워드 5개</h2>
     <section id="box" class="border rounded">
