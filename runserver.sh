@@ -18,3 +18,4 @@ echo "$PW" | sudo mv geckodriver /usr/local/bin/
 chmod 700 runbrowser.sh
 
 gnome-terminal -e ./runbrowser.sh
+https://www.youtube.com/watch?v=upRbKS-eFlM
