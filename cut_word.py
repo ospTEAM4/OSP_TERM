@@ -82,6 +82,7 @@ def cut_word(comments):
         analysis(comment)
 
     keyword=word_count(comments)
+    preference = {}
     preference["like"] = li
     preference["neutral"] = ne
     preference["dislike"] = di
