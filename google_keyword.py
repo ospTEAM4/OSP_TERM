@@ -7,6 +7,7 @@ import re
 import requests
 import time
 import cut_word
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 # 크롤링 봇 탐지 
 # from selenium.webdriver.chrome.options import Options
 # import chromedriver_autoinstaller
@@ -36,7 +37,8 @@ def result(request):
     url=request
 
     driver = webdriver.Chrome('chromedriver.exe')
-    #driver = webdriver.Firefox('geckodriver.exe')
+
+    #driver = webdriver.Firefox('C:/Users/momnp/PycharmProjects/osp_teamprj/geckodriver')
     driver.get(url)
     driver.implicitly_wait(10)
 
