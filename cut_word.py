@@ -4,9 +4,6 @@ from konlpy.tag import Mecab, Kkma, Hannanum, Okt, _komoran
 from konlpy.utils import pprint
 import pandas as pd
 from flask import Flask,render_template,redirect,url_for
-import sys
-import requests
-import json
 
 #comments = ['나는 학생이다', '진짜 별로다', '아 에어컨 춥다...ㅠㅠ', '행복행', 'hello']  # 다운에게 받는 댓글 리스트
 split_list = []  # 유나에게 넘기는 한 댓글 분석한 리스트
@@ -21,27 +18,6 @@ di= 0
 text=[]
 count={}
 preferenceCounts=[]
-client_id = "nwnijty7r7"
-client_secret = "QxLuVWoGt2eYkSnfGjMFd0bgkwfYYX6C2Fk9dbmL"
-url="https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze"
-headers = {
-    "X-NCP-APIGW-API-KEY-ID": client_id,
-    "X-NCP-APIGW-API-KEY": client_secret,
-    "Content-Type": "application/json"
-}
-#-*- codig: utf-8 -*-
-def analysis(comment):      
-    data = {
-    "content": comment
-    }
-    print(json.dumps(data, indent=4, sort_keys=True))
-    response = requests.post(url, data=json.dumps(data), headers=headers)
-    rescode = response.status_code
-    if(rescode == 200):
-        preference_check(json.loads(response.text)['document']['sentiment'])
-        print (response.text)
-    else:
-        print("Error : "+response.text)
 
 def korean_split(comment):  # 댓글 하나씩 분석해서 어간 list 만들어서 리턴
     tokenizer = Okt()
@@ -65,10 +41,10 @@ def word_count(comments):  # 댓글리스트 모든 댓글 카운트 & top 5개 
     return keywords
 
 def preference_check(word):
-    if (word == 'positive'):
+    if (word == 1):
         global li
         li+=1
-    elif (word == 'neutral'):
+    elif (word == 0):
         global ne
         ne+=1
     else:
@@ -80,6 +56,7 @@ def cut_word(comments):
     word_count(comments)  # 키워드 총 분석
     for comment in comments:  # 댓글 하나씩 넘, 모든 댓글 다 넘길 때까지 반복
 <<<<<<< HEAD
+<<<<<<< HEAD
         tmp = korean_split(comment)
         text.append(tmp)  # 유나에게 넘길 리스트
         # 유나한테 선호도 결과 받아옴
@@ -88,8 +65,11 @@ def cut_word(comments):
 =======
         #print(korean_split(comment))  # 유나에게 넘길 리스트
         analysis(comment)
+=======
+        print(korean_split(comment))  # 유나에게 넘길 리스트
+>>>>>>> parent of 64969f59 (add API)
         # 유나한테 선호도 결과 받아옴
-
+        preference_check(word)
     keyword=word_count(comments)
 >>>>>>> 64969f59fefc47e56014dfa3675e7574847519d1
     preference["like"] = li
