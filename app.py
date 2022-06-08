@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 import google_keyword
 import cut_word
 import database
+
 app = Flask(__name__)
 
 @app.route('/')
