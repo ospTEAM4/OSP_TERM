@@ -42,6 +42,9 @@ def find_url(url): # DB에서 url 찾기. 있으면 1, 없으면 0 반환
     return 0
 
 def push_data(url, preference):
+    if preference['like'] == 0 & preference['neutral'] == 0 & preference['dislike'] == 0 :
+        return
+
     record_element = make_record_element(preference['like'], preference['neutral'], preference['dislike'])
     element = find_url(url)
     if element == 0 :
