@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
 from selenium import webdriver
+from selenium.webdriver import Firefox
 from selenium.webdriver.common.keys import Keys
 from nltk.corpus import stopwords
 import re
@@ -35,11 +36,13 @@ import cut_word
 def result(request):
     url=request
 
-    driver = webdriver.Chrome('chromedriver.exe')
-    #driver = webdriver.Firefox('geckodriver.exe')
+    #driver = webdriver.Chrome('chromedriver.exe')
+    driver = webdriver.Firefox('')
     driver.get(url)
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(5)
 
+    time.sleep(1.5)
+    driver.execute_script("window.scrollTo(0,500);")
     time.sleep(1.5)
 
     # 유튜브 팝업 닫기
@@ -61,6 +64,7 @@ def result(request):
         last_height = new_height
 
     time.sleep(1.5)
+    driver.execute_script("window.scrollTo(500,0);")
 
     # 대댓글 모두 열기
     buttons = driver.find_elements_by_css_selector("#more-replies > a")
