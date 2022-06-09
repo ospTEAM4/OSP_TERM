@@ -59,7 +59,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-    </script>
     <div class="float-left" style="width:40%; height:40%; margin-top:50px; margin-left:100px; margin-bottom:10%;">
       <canvas id="pie-chart" width="50" height="50"></canvas>
     </div>
@@ -104,7 +103,17 @@
       {% endif %}
     </script>
 
-    <div class="card float-right" style="width: 35%; margin-top:150px; margin-bottom:30px; margin-right:100px;">
+    <h1 style="text-align:center; padding-top:80px;">preference</h2>
+    {% if preference %}
+      {% if preference[0]+preference[1]+preference[2]==0 %}
+        <h1 style="text-align:center;">0%</h1>
+      {% else %}
+        <h1 style="text-align:center;">{{preference[0]/(preference[0]+preference[1]+preference[2])*100}}%</h1>
+      {% endif %}
+    {% else %}
+      <h1 style="text-align:center;">0%</h1>
+    {% endif %}
+    <div class="card float-right" style="width: 35%; margin-top:8px; margin-bottom:30px; margin-right:100px;">
           <div class="card-header" style="background-color:#CD3F3E; color:#F4F6F6; text-align:center; padding-bottom:0px;">
               <span><h2>KEYWORD</h2></span>
           </div>
@@ -257,5 +266,5 @@
   </script>
 
   </body>
-  
+
 </html>
